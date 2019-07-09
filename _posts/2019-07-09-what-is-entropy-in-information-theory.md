@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "What Is Entropy in Information Theory?"
-categories: [information theory, computation]
+category: [information-theory]
 ---
 
 When I first saw the name entropy in decision trees, I really didn't think about it. I couldn't get the importance of this concept. So, I moved on to my machine learning (ML) adventure without it. However, almost every time I tried to learn a new ML concept, entropy was on my way. I couldn't escape from it. Then, I (with the encouragement of my graduate advisor who is an excellent mentor for me) decided to confront it. The first few days to understand the entropy was not easy in terms of understanding why it was created in the first place. We already have the probability, haven't we? But, no. It is very useful, fix some problems that the probability can't, and almost every concept in ML make use of it due to some computational reasons.
