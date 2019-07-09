@@ -10,21 +10,21 @@ In this first story of mine, I will try my best to clear out the concepts of ent
 
 I am not a physicist but as far as I know, entropy in physics corresponds to the energy of particles in a media. If we give an example, the four phases of matter would be a good candidate.
 
-![The leftmost image (ice) has the lowest entropy since the particles are not moving as fast as the other two. The middle (water) has more energy than ice. So the entropy is higher than ice. The rightmost (water vapor) has the highest entropy since the particles move fastest.](/../assets/images/entropy-physics.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/entropy-physics.png "The leftmost image (ice) has the lowest entropy since the particles are not moving as fast as the other two. The middle (water) has more energy than ice. So the entropy is higher than ice. The rightmost (water vapor) has the highest entropy since the particles move fastest."){:style="margin: 0 auto; display: block;" }
 
 This idea applies to the information theory in the sense of probability. Claude Shannon is the man who brings the idea in information theory. Suppose you have a computer. This computer can only output a sequence of characters. But some characters are permitted to repeat. The list of all possible characters that can present in the output is the dictionary of the computer. **The question is here how much information do you have about the output of the computer?**
 
-![A computer with a dictionary consists of the only letter "A" outputs a string of "AAAAAAAAAAAA".](/../assets/images/computer-w-single-output.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/computer-w-single-output.png "A computer with a dictionary consists of the only letter "A" outputs a string of "AAAAAAAAAAAA"."){:style="margin: 0 auto; display: block;" }
 
 The above computer has a dictionary D = { "A" }. So, we will have a guaranteed output of "A", right? This means that we know a lot about the output. We will get into how we will compute entropy, but at this point let's say that this output has an entropy value of 0. Because we are certain about the output. It will consist of nothing else but the letter "A" only.
 
 What if our dictionary consists of more than one letter or even numbers? For example, dictionary D = { "A", "B" }. Then the output of the computer might be as follows.
 
-![A computer with a dictionary consists of letter "A" and "B", outputs a string of "AAAAAABBBBBB".](/../assets/images/computer-w-two-output.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/computer-w-two-output.png "A computer with a dictionary consists of letter "A" and "B", outputs a string of "AAAAAABBBBBB"."){:style="margin: 0 auto; display: block;" }
 
 Let's say from this output we need to pick a letter. Remember that each pick is independent of each other. So, what is the probability of producing an output that has the same order as in the original output sequence? The answer to this question is comes from the probability, right?
 
-![The probability of picking "A" or "B" independently is 0.5. There are 12 letters in the output. So we have multiplied 12 independent probability of picking different letters.](/../assets/images/equation1.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation1.png "The probability of picking "A" or "B" independently is 0.5. There are 12 letters in the output. So we have multiplied 12 independent probability of picking different letters."){:style="margin: 0 auto; display: block;" }
 
 As you can see, the result is very small. This means that producing the same output as the computer is very difficult. We have little information about the output. Our chance to pick a letter and knowing what it is is the same as tossing a coin. This result suggests us we have a higher entropy value here.
 
@@ -32,35 +32,35 @@ But why do we need the entropy? We have the probability and it tells us somethin
 
 We need a way to not reducing the output that much but at the same time take care of all the letters in the sequence. What if we try to get rid of the exponential function (the repeated multiplication) by converting it to a linear function. How do we do that? Maybe the answer is in the summation. Because repeated summation is just a linear function, unlike multiplication. So, the conversion can be easily made by logarithms. Then let's take the logarithm of the above equation. There is only a little problem here. Which number should be used as the base of the logarithm? You can pick whatever number you want. However, we are from the area of computation. We love to express numbers and information as bits. A bit is a 1 or 0. So, a bit can be expressed in base 2. This means that we want to express the data with two symbols. Therefore, it is natural that we choose 2 as the base for the logarithm. Now, let's take the logarithm at base 2.
 
-![Logarithm base 2 of the above equation.](/../assets/images/equation2.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation2.png "Logarithm base 2 of the above equation."){:style="margin: 0 auto; display: block;" }
 
 What a beautiful number here. But, hmm…, you see there are two little problems here. First, we have 12 letters in the sequence and the result is 12. Will this number increase as the letter count increases? Yes, it will increase. So we can normalize it with the letter count by dividing it to 12 in this case.
 
-![The result is normalized with the letter count.](/../assets/images/equation3.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation3.png "The result is normalized with the letter count."){:style="margin: 0 auto; display: block;" }
 
 This is much better. But, why the number is negative? There is no point to proceed with a negative number while trying to measure the information in a sequence. So, let's multiply the expression with -1.
 
-![The previous expression is multiplied by -1 to get rid of the redundant negative sign.](/../assets/images/equation4.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation4.png "The previous expression is multiplied by -1 to get rid of the redundant negative sign."){:style="margin: 0 auto; display: block;" }
 
 This is it. We made to the end. Almost. We still haven't converted the multiplication into the summation.
 
-![The multiplication is eliminated by taking advantage of the property of logarithms.](/../assets/images/equation5.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation5.png "The multiplication is eliminated by taking advantage of the property of logarithms."){:style="margin: 0 auto; display: block;" }
 
 The first six expressions of the sequence are for the letter "A" and the remaining six is for the letter "B". Now, let's make this more obvious and distribute the multiplication over the whole expression.
 
-![The coefficient at the beginning of the whole expression is distributed. In the meantime, the summations are grouped together each for a letter (6 for "A" and 6 for "B").](/../assets/images/equation6.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation6.png "The coefficient at the beginning of the whole expression is distributed. In the meantime, the summations are grouped together each for a letter (6 for "A" and 6 for "B")."){:style="margin: 0 auto; display: block;" }
 
 This is the entropy. For this sequence, as we change the number of letters, the probability of producing the exact same output will change. However, the entropy will never change as the proportion of letter counts are constant regardless of the total number of letters in the sequence. If we generalize the entropy, the following expression can be obtained.
 
-![The general formula for entropy.](/../assets/images/equation7.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation7.png "The general formula for entropy."){:style="margin: 0 auto; display: block;" }
 
 P is the probability of picking ith distinct element from the sequence. The knowledge and entropy are opposites. If we have high knowledge about a sequence, the entropy is lower, and vice versa. Let's make another example with a different sequence.
 
-![An example sequence with a dictionary of D = {"A", "B", "C"}.](/../assets/images/computer-w-three-output.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/computer-w-three-output.png "An example sequence with a dictionary of D = {"A", "B", "C"}."){:style="margin: 0 auto; display: block;" }
 
 Here we have 3 distinct letters in a 12 letter sequence. Let's calculate the entropy with the above formula.
 
-![The entropy of the previous sequence.](/../assets/images/equation8.png){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation8.png "The entropy of the previous sequence."){:style="margin: 0 auto; display: block;" }
 
 Ok, we have calculated the entropy. But, what's the result even means? Actually, the result is the average number of yes/no questions to guess the next letter in the sequence. Be careful about that. You need to ask the questions in the smartest way possible.
 
