@@ -2,6 +2,7 @@
 layout: post
 title:  "A Deeplearning Course Management System with JupyterHub and NVIDIA CUDA"
 categories: [server management]
+author: Tolga Üstünkök
 ---
 
 # Introduction
