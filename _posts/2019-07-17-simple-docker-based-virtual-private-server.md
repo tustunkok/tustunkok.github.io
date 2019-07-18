@@ -19,7 +19,7 @@ As a note to the reader, some of the text is not my own. But you can always find
 
 # Prepare a VPS Key Pair
 
-The tutorial in the link https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1604 is for Ubuntu 16.04. However, it should be same for Ubuntu 18.04, too.
+The tutorial in the [link](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1604) is for Ubuntu 16.04. However, it should be same for Ubuntu 18.04, too.
 
 First, create a key pair on the client computer.
 
@@ -27,11 +27,11 @@ First, create a key pair on the client computer.
 $ ssh-keygen
 ~~~
 
-By default, *ssh-keygen* will create a 2048-bit RSA key pair, which is secure enough for most use cases (you may optionally pass in the -b 4096 flag to create a larger 4096-bit key). Press *ENTER* to save the key pair into the .ssh/ subdirectory in your home directory or specify an alternate path.
+By default, `ssh-keygen` will create a 2048-bit RSA key pair, which is secure enough for most use cases (you may optionally pass in the -b 4096 flag to create a larger 4096-bit key). Press *ENTER* to save the key pair into the .ssh/ subdirectory in your home directory or specify an alternate path.
 
 Here you optionally may enter a secure passphrase, which is highly recommended. A passphrase adds an additional layer of security to prevent unauthorized users from logging in.
 
-Copy the public key to Ubuntu Server. The quickest way to copy your public key to the Ubuntu host is to use a utility called *ssh-copy-id*. Due to its simplicity, this method is highly recommended if available.
+Copy the public key to Ubuntu Server. The quickest way to copy your public key to the Ubuntu host is to use a utility called `ssh-copy-id`. Due to its simplicity, this method is highly recommended if available.
 
 ~~~
 $ ssh-copy-id username@remote_host
@@ -63,7 +63,7 @@ You should now have SSH-key-based authentication configured on your server, allo
 
 # Installing Docker on an Ubuntu 18.04 Machine
 
-You should follow the instructions at https://docs.docker.com/install/linux/docker-ce/ubuntu/.
+You should follow the instructions at [https://docs.docker.com/install/linux/docker-ce/ubuntu/](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
 
 A quick summary is that; you should uninstall any previous installation of Docker from the machine you used with the following command:
 
@@ -118,7 +118,7 @@ $ sudo usermod -aG docker $USER
 
 # Migrate a Docker Container
 
-The following tutorial is taken from https://bobcares.com/blog/move-docker-container-to-another-host/ and https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes.
+The following tutorial is taken from [here](https://bobcares.com/blog/move-docker-container-to-another-host/) and [here](https://docs.docker.com/storage/volumes/#backup-restore-or-migrate-data-volumes).
 
 When Docker containers or images are moved from one host to another using export or commit tools, the underlying data volume is not migrated.
 
@@ -161,7 +161,7 @@ $ docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp \
 
 # Installing OpenVPN Without Migrating a Volume
 
-This section explains how to install the OpenVPN server in a Docker container without migrating a previously populated volume. The content of this section is pulled from the https://github.com/kylemanna/docker-openvpn.
+This section explains how to install the OpenVPN server in a Docker container without migrating a previously populated volume. The content of this section is pulled from [here](https://github.com/kylemanna/docker-openvpn).
 
 Pick a name for the `$OVPN_DATA` data volume container. It’s recommended to use the `ovpn-data-` prefix to operate seamlessly with the reference systemd service. Users are encouraged to replace example with a descriptive name of their choosing.
 
@@ -202,7 +202,7 @@ $ docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none –rm \
 
 # Installing Teamspeak 3
 
-Starting a Teamspeak 3 server in a Docker container is quite simple. Docker provides an example at https://docs.docker.com/samples/library/teamspeak/. But, you can run the server with the following command.
+Starting a Teamspeak 3 server in a Docker container is quite simple. Docker provides an example at [https://docs.docker.com/samples/library/teamspeak/](https://docs.docker.com/samples/library/teamspeak/). But, you can run the server with the following command.
 
 ~~~
 $ docker run -d --name ts3srv -v \
