@@ -54,4 +54,4 @@ Bu gönderi makine öğrenmesine giriş sunumlarını desteklemek amaçlı yazı
 [**Üçüncü Gün (Henüz yüklenmedi)**](/assets/pdfs/Day 3.pdf)
 
 ## Kaynak kodlar
-Seminerler bittiği zaman kullanılan ve oluşturulan kaynak kodlar (Github)[http://github.com/tustunkok/]'da paylaşılacaktır.
+Seminerler bittiği zaman kullanılan ve oluşturulan kaynak kodlar [Github](http://github.com/tustunkok/)'da paylaşılacaktır.
