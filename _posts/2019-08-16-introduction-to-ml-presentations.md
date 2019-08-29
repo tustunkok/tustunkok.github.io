@@ -38,20 +38,18 @@ Bu gönderi makine öğrenmesine giriş sunumlarını desteklemek amaçlı yazı
     * Precision
     * Recall
     * F1-Score
-10. **Optimizasyon Yöntemleri?**
-    * Gradient Descent Optimization
+10. Optimizasyon Yöntemleri
     * Particle Swarm Optimization
 
 ### Gün 3: Derin Öğrenmeye Giriş
 1. Vanilla Derin Ağlar
 2. Convolutional Neural Networks
 3. Autoencoders
-4. Generative Adverserial Networks
 
 ## Sunum Linkleri
 [**Birinci Gün**](/assets/pdfs/Day 1.pdf)  
 [**İkinci Gün**](/assets/pdfs/Day 2.pdf)  
-[**Üçüncü Gün (Henüz yüklenmedi)**](/assets/pdfs/Day 3.pdf)
+[**Üçüncü Gün**](/assets/pdfs/Day 3.pdf)
 
 ## Kaynak kodlar
-Seminerler bittiği zaman kullanılan ve oluşturulan kaynak kodlar [Github](http://github.com/tustunkok/)'da paylaşılacaktır.
+Sunumlar sırasında üretilen Jupyter Notebook'ları [Github](https://github.com/tustunkok/tbd-demos)'da bulabilirsiniz.
