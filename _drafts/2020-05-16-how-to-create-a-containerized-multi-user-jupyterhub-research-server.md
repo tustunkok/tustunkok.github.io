@@ -83,7 +83,7 @@ add libraries or frameworks to the notebooks, you have to add them to the
 respected `Dockerfile` and rebuild the Docker image. This spawner type has the 
 main focus of this post.
 
-# Configuring the JupyterHub Docker Image
+# Customizing the JupyterHub Docker Image
 JupyterHub has an [official Docker image][jupyterhubdockerimg-link]. This image 
 contains only the JupyterHub service itself. The notebook, authentication 
 mechanisms and/or any configuration is not included. One has to derive a new 
@@ -128,7 +128,7 @@ COPY jupyterhub_config.py .
 When you build the image defined in the `Dockerfile` with the following command,
 you will have a ready-to-run JupyterHub image for the next phases.
 
-~~~
+~~~ bash
 $ docker build --rm -t jupyterhub .
 ~~~
 
@@ -136,13 +136,13 @@ As a refresher, the final dot(.) means the *current directory*. Here the tag of
 the prepared image is `jupyterhub`. If you run the following command, you can 
 see the image.
 
-~~~
+~~~ bash
 $ docker image ls
 ~~~
 
 Output looks like this:
 
-~~~
+~~~ bash
 REPOSITORY              TAG           IMAGE ID        CREATED             SIZE
 jupyterhub              latest        cb9bfc0fc293    14 hours ago        935MB
 salda-special           latest        4847a31b61b7    6 days ago          9.85GB
@@ -161,6 +161,33 @@ ubuntu                  latest        a2a15febcdf3    9 months ago        64.2MB
 jupyterhub/jupyterhub   latest        64d82994fd55    12 months ago       932MB
 openproject/community   8             99757bbbc2a4    14 months ago       1.59GB
 ~~~
+
+# Customizing the Docker Stack
+Luckily, Jupyter project provides official docker stacks for variousb purposes. 
+If you follow this [link][dockerstacks-link] you can see many `*-notebook` 
+images in the repository. These notebooks are in a hierarchical order. One can 
+express this order as a tree structure.
+
+- base-notebook
+    - minimal-notebook
+        - r-notebook
+        - scipy-notebook
+            - datascience-notebook
+            - pyspark-notebook
+                - all-spark-notebook
+            - tensorflow-notebook
+
+All notebooks are either directly or indirectly dervived from `base-notebook`. 
+This notebook directs the underlying system to install all the necessary 
+packages to run a Jupyter (Notebook | Lab).
+
+If you need any additional packages or libraries, you can add it to the any 
+`Dockerfile` you want. However, if you changed any node other than a leaf, you 
+have to rebuild all the other dependent images to take your changes in effect.
+
+For example, I generally make a brand new image from the `tensorflow-notebook` 
+and add whatever libraries or packages that I want to install. By doing this, 
+the original `Dockerfiles` stays untouched and the risk of failure is minimized.
 
 [colab-link]: https://colab.research.google.com/
 [kaggle-link]: https://kaggle.com/
