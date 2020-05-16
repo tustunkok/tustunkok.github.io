@@ -263,8 +263,43 @@ reach the onboard GPU.
 Up to this point, we customize and build multiple images. These images need an 
 orchestrator to work together. Although there are various choices that you can 
 choose to do the orchestration, I will explain how you can use 
-[Docker Compose][dockercompose-link] in such a task. Docker Compose is just an 
-addition to the Docker. Because of that it is very lightweight. 
+[Docker Compose][dockercompose-link] in such a task.
+
+Docker Compose is just an addition to the Docker. Because of that, it is very 
+lightweight. Docker Compose gets an YAML file. The YAML file contains the 
+services, service properties and relationships between services.
+
+The default name for the YAML file is `docker-compose.yml`. The following is a 
+sample YAML file a complete containerized JupyterHub configuration.
+
+~~~ yaml
+version: '2.3'
+
+services:
+  jupyterhub:
+    build: ./jupyterhub
+    image: jupyterhub
+    ports:
+      - "80:8000"
+    container_name: jupyterhub
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jupyterhub_data:/srv/jupyterhub
+    environment:
+      DOCKER_JUPYTER_CONTAINER: jupyter-notebook
+      DOCKER_JUPYTER_IMAGE: salda-special
+      DOCKER_NETWORK_NAME: ${COMPOSE_PROJECT_NAME}_default
+      HUB_IP: jupyterhub
+
+  jupyternotebook:
+    runtime: nvidia
+    image: salda-special
+    container_name: jupyter-notebook
+    command: echo
+    
+volumes:
+  jupyterhub_data:
+~~~
 
 [colab-link]: https://colab.research.google.com/
 [kaggle-link]: https://kaggle.com/
