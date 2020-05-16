@@ -163,7 +163,7 @@ openproject/community   8             99757bbbc2a4    14 months ago       1.59GB
 ~~~
 
 # Customizing the Docker Stack
-Luckily, Jupyter project provides official docker stacks for variousb purposes. 
+Luckily, Jupyter project provides official docker stacks for various purposes. 
 If you follow this [link][dockerstacks-link] you can see many `*-notebook` 
 images in the repository. These notebooks are in a hierarchical order. One can 
 express this order as a tree structure.
@@ -177,7 +177,7 @@ express this order as a tree structure.
                 - all-spark-notebook
             - tensorflow-notebook
 
-All notebooks are either directly or indirectly dervived from `base-notebook`. 
+All notebooks are either directly or indirectly derived from `base-notebook`. 
 This notebook directs the underlying system to install all the necessary 
 packages to run a Jupyter (Notebook | Lab).
 
@@ -259,6 +259,13 @@ Sat May 16 20:38:33 2020
 It means that you have successfuly install the NVIDIA Container Toolkit and 
 reach the onboard GPU.
 
+# Getting Everything Together - Docker Compose
+Up to this point, we customize and build multiple images. These images need an 
+orchestrator to work together. Although there are various choices that you can 
+choose to do the orchestration, I will explain how you can use 
+[Docker Compose][dockercompose-link] in such a task. Docker Compose is just an 
+addition to the Docker. Because of that it is very lightweight. 
+
 [colab-link]: https://colab.research.google.com/
 [kaggle-link]: https://kaggle.com/
 [gpu-wikipedia]: https://en.wikipedia.org/wiki/Graphics_processing_unit
@@ -272,3 +279,4 @@ reach the onboard GPU.
 [jupyterhubdockerimg-link]: https://hub.docker.com/r/jupyterhub/jupyterhub/
 [tensorflowdoc-link]: https://www.tensorflow.org/install/gpu
 [nvidiatoolkit-link]: https://github.com/NVIDIA/nvidia-docker
+[dockercompose-link]: https://docs.docker.com/compose/
