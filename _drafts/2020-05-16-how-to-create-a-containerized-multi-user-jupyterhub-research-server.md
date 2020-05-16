@@ -189,6 +189,76 @@ For example, I generally make a brand new image from the `tensorflow-notebook`
 and add whatever libraries or packages that I want to install. By doing this, 
 the original `Dockerfiles` stays untouched and the risk of failure is minimized.
 
+## Running Tensorflow with GPU Support
+Running Tensorflow with GPU is a little tricky. However, if you follow the 
+[documentation of Tensorflow][tensorflowdoc-link] strictly, the chances that 
+you will have any problems is low. Regardless of running the Tensorflow in 
+Docker or not, you must have the NVIDIA drivers installed in the host computer.
+
+To run the whole official docker stack with NVIDIA CUDA 10.1 and CUDNN 7.x 
+(those are the requirements of Tensorflow v2.1.0), you have to change the base 
+image of the `base-notebook`. The first line of the `base-notebook` should look 
+like this.
+
+~~~ docker
+ARG ROOT_CONTAINER=nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
+ARG BASE_CONTAINER=$ROOT_CONTAINER
+FROM $BASE_CONTAINER
+~~~
+
+With those lines, the `base-notebook` now relies on the official Docker image of
+NVIDIA. When you change the `base-notebook` you have to rebuild all the other 
+images that built upon it. This means that you have to rebuild all other 
+`*-notebook` images from scratch. This process is time consuming but 
+straightforward.
+
+From this point, all of your docker stack images have capable of running their 
+codes on the GPU. To give the ability of using GPUs to Docker, you have to 
+install the [NVIDIA Container Toolkit][nvidiatoolkit-link]. To do this, write 
+the following commands to a terminal.
+
+~~~ bash
+$ # Add the package repositories
+$ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+$ curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+$ curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+$ sudo apt-get update && sudo apt-get install -y nvidia-container-toolkit
+$ sudo systemctl restart docker
+~~~
+
+After installing the `nvidia-container-toolkit` and restarting `docker` daemon, 
+you can run the `nvidia-smi` command and see if you can access the GPU.
+
+~~~ bash
+$ #### Test nvidia-smi with the latest official CUDA image
+$ docker run --rm --gpus all nvidia/cuda:10.0-base nvidia-smi
+~~~
+
+You should see a result similar to this:
+
+~~~ bash
+Sat May 16 20:38:33 2020
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 440.64.00    Driver Version: 440.64.00    CUDA Version: 10.1     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 1080    On   | 00000000:01:00.0 Off |                  N/A |
+|  0%   34C    P8     8W / 200W |   7997MiB /  8116MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+|    0      9174      C   /opt/conda/bin/python                       7985MiB |
++-----------------------------------------------------------------------------+
+~~~
+
+It means that you have successfuly install the NVIDIA Container Toolkit and 
+reach the onboard GPU.
+
 [colab-link]: https://colab.research.google.com/
 [kaggle-link]: https://kaggle.com/
 [gpu-wikipedia]: https://en.wikipedia.org/wiki/Graphics_processing_unit
@@ -200,3 +270,5 @@ the original `Dockerfiles` stays untouched and the risk of failure is minimized.
 [jupyterhubauth-link]: https://jupyterhub.readthedocs.io/en/stable/getting-started/authenticators-users-basics.html
 [dockerstacks-link]: https://github.com/jupyter/docker-stacks
 [jupyterhubdockerimg-link]: https://hub.docker.com/r/jupyterhub/jupyterhub/
+[tensorflowdoc-link]: https://www.tensorflow.org/install/gpu
+[nvidiatoolkit-link]: https://github.com/NVIDIA/nvidia-docker
