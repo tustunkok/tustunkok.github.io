@@ -232,6 +232,27 @@ variables will be set in the `docker-compose.yml` file in a later section.
 You can use any of the previously mentioned authentication methods. In this 
 example, `OAuthentication` with [Github][github-link] accounts is used.
 
+To do this one have to import the `GitHubOAuthenticator` class and set it to the
+`authenticator_class` for the JupyterHub. After doing that, you can use the 
+properties of the `GitHubOAuthenticator`. You should make the necessary 
+configuration in the Github side and then set the `oauth_callback_url`, 
+`client_id`, and `client_secret` variables.
+
+The Github configuration for OAuth is quite simple. You should define a new 
+application for your user. Each application with OAuth have a unique id and 
+secret. You should paste the id and secret to the specified places in the 
+configuration file.
+
+### Miscellaneous Configuration Options
+The last two lines of the configuration file are optional.
+
+The first one indicates that if a user stops her/his notebook server, then the 
+corresponding container will be deleted.
+
+The second one indicates that the default interface is the JupyterLab and not 
+Jupyter Notebook. Jupyter Notebook is fine with its extensions as such. But, the
+interface is not as usable as JupyterLab's interface.
+
 # Customizing the Docker Stack
 Luckily, Jupyter project provides official docker stacks for various purposes. 
 If you follow this [link][dockerstacks-link] you can see many `*-notebook` 
