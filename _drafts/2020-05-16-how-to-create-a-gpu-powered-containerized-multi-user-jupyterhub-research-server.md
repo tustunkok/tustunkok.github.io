@@ -362,6 +362,31 @@ Sat May 16 20:38:33 2020
 It means that you have successfuly install the NVIDIA Container Toolkit and 
 reach the onboard GPU.
 
+The only remaining thing at this point is enabling GPU support for tensorflow. 
+To do this one should edit the `Dockerfile` of the `tensorflow-notebook`. The 
+line containing the following code:
+
+~~~ docker
+# Install Tensorflow
+RUN pip install --quiet \
+    'tensorflow==2.1.0' && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+~~~
+
+Should be changed to:
+
+~~~ docker
+# Install Tensorflow
+RUN pip install --quiet \
+    'tensorflow-gpu==2.1.0' && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+~~~
+
+That's all. Now, the containers of this image can capable of using the onboard 
+GPU.
+
 ## Getting Everything Together - Docker Compose
 Up to this point, we customize and build multiple images. These images need an 
 orchestrator to work together. Although there are various choices that you can 
@@ -432,28 +457,38 @@ services:
       DOCKER_JUPYTER_IMAGE: tensorflow-notebook
       DOCKER_NETWORK_NAME: ${COMPOSE_PROJECT_NAME}_default
       HUB_IP: jupyterhub
-
-  jupyternotebook:
-    runtime: nvidia
-    image: tensorflow-notebook
-    container_name: jupyter-notebook
-    command: echo
     
 volumes:
   jupyterhub_data:
 ~~~
 
 All `docker-compose.yml` files need a `version` key. This line tells the Docker 
-Compose to use which version of the Docker Compose parser. Then, with the 
-`services` key, two services are created. The first one is `jupyterhub` and the 
-second one is `jupyternotebook`.
+Compose to use which version of the Docker Compose parser. Then, within the 
+`services` key, one service is created, `jupyterhub`.
 
 ### Docker Compose Configuration for JupyterHub Service
 The `build` subkey indicates the place for the image to be used. Since the 
 `docker-compose.yml` file lays in the same place with the `jupyterhub` 
-directory, the value should be `./jupyterhub`. The value of `image` subkey is 
-the name of the produced image when you build the service. The `ports` subkey is
-an array and self-explanatory. It indicates the `dest:source` port forwarding.
+directory, the value should be `./jupyterhub`.
+
+The value of `image` subkey is the name of the produced image when you build 
+the service. 
+
+The `ports` subkey is an array and self-explanatory. It indicates the 
+`dest:source` port forwarding.
+
+`container_name` is the name of the container when you create an instance.
+
+`volumes` are the volumes to be mounted. The left hand side of the string 
+states the source. Source can be either a volume or a directory from the host 
+machine. The first entry is a special one. Without this entry, JupyterHub cannot
+be able to spawn Jupyter Notebook containers. The second volume makes the 
+database and configuration information persistent across restarts and rebuilds.
+
+`environment` defines environment variables that will be defined in the 
+JupyterHub container. Notice that those environment variables are the ones that 
+are used in the JupyterHub configuration file.
+
 
 [colab-link]: https://colab.research.google.com/
 [kaggle-link]: https://kaggle.com/
