@@ -6,6 +6,10 @@ categories: ['tutorial', 'notes-to-myself', 'vps']
 author: Tolga Üstünkök
 ---
 
+# Prerequisites
+TODO: This section will contain any preliminary information to fully understand 
+this post.
+
 # Introduction
 Development servers with high computation powers are important for research
 groups. Because of that, there are multiple solutions from various companies. 
@@ -162,6 +166,72 @@ jupyterhub/jupyterhub   latest        64d82994fd55    12 months ago       932MB
 openproject/community   8             99757bbbc2a4    14 months ago       1.59GB
 ~~~
 
+## Configuring the JupyterHub
+Previously mentioned `jupyterhub_config.py` file contains the necessary 
+information to configure JupyterHub. You can see an example configuration in the
+following snippet.
+
+~~~ python
+import os
+
+c.JupyterHub.spawner_class = "dockerspawner.DockerSpawner"
+c.DockerSpawner.image = os.environ["DOCKER_JUPYTER_IMAGE"]
+c.DockerSpawner.network_name = os.environ["DOCKER_NETWORK_NAME"]
+c.JupyterHub.hub_ip = os.environ["HUB_IP"]
+c.Authenticator.admin_users = {'user1', 'user2'}
+
+from oauthenticator.github import GitHubOAuthenticator
+c.JupyterHub.authenticator_class = GitHubOAuthenticator
+
+c.GitHubOAuthenticator.oauth_callback_url = \ 
+                    'http://<host_ip_addr>/hub/oauth_callback'
+c.GitHubOAuthenticator.client_id = '<client_id>'
+c.GitHubOAuthenticator.client_secret = '<clien_secret>'
+
+notebook_dir = os.environ.get('DOCKER_NOTEBOOK_DIR') or '/home/jovyan/work'
+c.DockerSpawner.notebook_dir = notebook_dir
+
+# Mount the real user's Docker volume on the host to the notebook user's
+# notebook directory in the container
+c.DockerSpawner.volumes = {
+          'jupyterhub-user-{username}': notebook_dir,
+          'jupyterhub-shared': '/home/jovyan/work/shared',
+          'jupyterhub-data': '/home/jovyan/work/data'
+}
+
+c.DockerSpawner.remove_containers = True
+c.Spawner.default_url = '/lab'
+~~~
+
+### Spawner and Network Configurations
+As you can see from the code snippet, the `spawner_class` attribute is set to 
+the `dockerspawner.DockerSpawner` class. This means that when the user logs in 
+the notebook is spawned in a Docker container. However, you also need to provide
+the image, container, network, and volume properties.
+
+- By using the `image` property of the `DockerSpawner`, you can set the image 
+which will be used while creating the containers.
+- By using the `network_name`, you can set the network name. This is important 
+because when the container is started you have to tell the Docker which network 
+the newly created container will join.
+- By using the `notebook_dir` property, you can set the mount point for the 
+Jupyter Notebook.
+
+If you want persistent storage for your users. You have to assign a volume for 
+each of them. The `volumes` property can be a `dict()` object. Keys of the 
+dictionary are the volume names and values are the mount points. In this 
+example, a volume for each user is created. Besides, if you want to share data 
+among users, you can also set other fixed named volumes as well.
+
+Then, you have to specify the `hub_ip`. This is the ip address of the JupyterHub
+container. In Docker, the ip addresses of the containers in network namespaces 
+are resolved by using their names by internal DNS records. Those environment 
+variables will be set in the `docker-compose.yml` file in a later section.
+
+### Authentication Configurations
+You can use any of the previously mentioned authentication methods. In this 
+example, `OAuthentication` with [Github][github-link] accounts is used.
+
 # Customizing the Docker Stack
 Luckily, Jupyter project provides official docker stacks for various purposes. 
 If you follow this [link][dockerstacks-link] you can see many `*-notebook` 
@@ -181,9 +251,10 @@ All notebooks are either directly or indirectly derived from `base-notebook`.
 This notebook directs the underlying system to install all the necessary 
 packages to run a Jupyter (Notebook | Lab).
 
-If you need any additional packages or libraries, you can add it to the any 
-`Dockerfile` you want. However, if you changed any node other than a leaf, you 
-have to rebuild all the other dependent images to take your changes in effect.
+If you need any additional packages or libraries, you can clone this repository 
+and add necessary packages and libraries to the any `Dockerfile` you want. 
+However, if you changed any node other than a leaf in the hierarchy, you have to
+rebuild all the other dependent images to take your changes in effect.
 
 For example, I generally make a brand new image from the `tensorflow-notebook` 
 and add whatever libraries or packages that I want to install. By doing this, 
@@ -281,7 +352,7 @@ services:
     image: jupyterhub
     ports:
       - "80:8000"
-    container_name: jupyterhub
+    container_name: jupyterhub-container
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - jupyterhub_data:/srv/jupyterhub
@@ -315,3 +386,4 @@ volumes:
 [tensorflowdoc-link]: https://www.tensorflow.org/install/gpu
 [nvidiatoolkit-link]: https://github.com/NVIDIA/nvidia-docker
 [dockercompose-link]: https://docs.docker.com/compose/
+[github-link]: https://github.com/
