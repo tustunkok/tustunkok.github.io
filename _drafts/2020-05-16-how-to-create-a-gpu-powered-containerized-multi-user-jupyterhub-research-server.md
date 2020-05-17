@@ -489,6 +489,13 @@ database and configuration information persistent across restarts and rebuilds.
 JupyterHub container. Notice that those environment variables are the ones that 
 are used in the JupyterHub configuration file.
 
+## Conclusion
+Owning a research server allowing multiple users interact with it at the same 
+time is an important asset for research teams. In this post, it was explained 
+how to set up a server with these features. This type of posts are relatively 
+important because there is not much information about getting those things 
+together. I hope you are enjoyed and informed. Feel free to provide any feedback
+related or not related to the post. See you...
 
 [colab-link]: https://colab.research.google.com/
 [kaggle-link]: https://kaggle.com/
