@@ -7,8 +7,19 @@ author: Tolga Üstünkök
 ---
 
 # Prerequisites
-TODO: This section will contain any preliminary information to fully understand 
-this post.
+**Concepts about Linux**
+1. **Know** how to use a Linux machine from remote via SSH.
+2. Understand how network namespaces work under Linux.
+3. Understand what is the mount concept and how mounting works under Linux.
+
+**Concepts about Docker**
+1. Some working experience with Docker.
+2. Know how to create new images.
+3. Know how to customize existing images.
+4. Some knowledge about Docker Compose.
+
+**Concepts about Other Staff**
+1. Knowledge about Git will make your life easier.
 
 # Introduction
 Development servers with high computation powers are important for research
@@ -354,15 +365,54 @@ reach the onboard GPU.
 # Getting Everything Together - Docker Compose
 Up to this point, we customize and build multiple images. These images need an 
 orchestrator to work together. Although there are various choices that you can 
-choose to do the orchestration, I will explain how you can use 
+choose to do the orchestration, this document will explain how you can use 
 [Docker Compose][dockercompose-link] in such a task.
 
-Docker Compose is just an addition to the Docker. Because of that, it is very 
+Docker Compose is just a plugin to the Docker. Because of that, it is very 
 lightweight. Docker Compose gets an YAML file. The YAML file contains the 
-services, service properties and relationships between services.
+definitions of services, service properties and relationships between services.
 
-The default name for the YAML file is `docker-compose.yml`. The following is a 
-sample YAML file a complete containerized JupyterHub configuration.
+The default name for the YAML file is `docker-compose.yml`. The directory 
+structure including the `docker-compose.yml` is as follows.
+
+~~~
+.
+├── docker-compose.yml
+├── docker-stacks
+│   ├── all-spark-notebook
+│   ├── base-notebook
+│   ├── binder
+│   ├── CODE_OF_CONDUCT.md
+│   ├── conftest.py
+│   ├── CONTRIBUTING.md
+│   ├── datascience-notebook
+│   ├── docs
+│   ├── examples
+│   ├── LICENSE.md
+│   ├── Makefile
+│   ├── minimal-notebook
+│   ├── pyspark-notebook
+│   ├── pytest.ini
+│   ├── README.md
+│   ├── requirements-dev.txt
+│   ├── r-notebook
+│   ├── scipy-notebook
+│   ├── tensorflow-notebook
+│   └── test
+└── jupyterhub
+    ├── Dockerfile
+    └── jupyterhub_config.py
+
+21 directories, 11 files
+~~~
+
+As you can see from the directory structure, the `docker-compose.yml` stands 
+together with directories named `jupyterhub` and the `docker-stacks` repository.
+The necessary information to prepare both of those directories are given in the 
+previous sections.
+
+The following is a sample YAML file for a complete containerized JupyterHub 
+configuration.
 
 ~~~ yaml
 version: '2.3'
@@ -379,19 +429,31 @@ services:
       - jupyterhub_data:/srv/jupyterhub
     environment:
       DOCKER_JUPYTER_CONTAINER: jupyter-notebook
-      DOCKER_JUPYTER_IMAGE: salda-special
+      DOCKER_JUPYTER_IMAGE: tensorflow-notebook
       DOCKER_NETWORK_NAME: ${COMPOSE_PROJECT_NAME}_default
       HUB_IP: jupyterhub
 
   jupyternotebook:
     runtime: nvidia
-    image: salda-special
+    image: tensorflow-notebook
     container_name: jupyter-notebook
     command: echo
     
 volumes:
   jupyterhub_data:
 ~~~
+
+All `docker-compose.yml` files need a `version` key. This line tells the Docker 
+Compose to use which version of the Docker Compose parser. Then, with the 
+`services` key, two services are created. The first one is `jupyterhub` and the 
+second one is `jupyternotebook`.
+
+## Docker Compose Configuration for JupyterHub Service
+The `build` subkey indicates the place for the image to be used. Since the 
+`docker-compose.yml` file lays in the same place with the `jupyterhub` 
+directory, the value should be `./jupyterhub`. The value of `image` subkey is 
+the name of the produced image when you build the service. The `ports` subkey is
+an array and self-explanatory. It indicates the `dest:source` port forwarding.
 
 [colab-link]: https://colab.research.google.com/
 [kaggle-link]: https://kaggle.com/
