@@ -6,7 +6,7 @@ categories: ['tutorial', 'notes-to-myself', 'vps']
 author: Tolga Üstünkök
 ---
 
-# Prerequisites
+## Prerequisites
 **Concepts about Linux**
 1. **Know** how to use a Linux machine from remote via SSH.
 2. Understand how network namespaces work under Linux.
@@ -21,7 +21,7 @@ author: Tolga Üstünkök
 **Concepts about Other Staff**
 1. Knowledge about Git will make your life easier.
 
-# Introduction
+## Introduction
 Development servers with high computation powers are important for research
 groups. Because of that, there are multiple solutions from various companies. 
 Google has its [Colab][colab-link] environment as well as the 
@@ -41,7 +41,7 @@ management to the containers is embedded in the site itself. In Colab, this
 process is handled by Google Accounts. Thus, if you want to set up a site like 
 those, you have to handle the access management by yourself.
 
-## JupyterHub
+### JupyterHub
 [JupyterHub][jupyterhub-link] is an open-source multi-user version of the 
 notebook designed for companies, classrooms and research labs. It is designed to
 manage user access to notebook servers via several authentication mechanisms. 
@@ -52,7 +52,7 @@ explains the working principle of it.
 
 ![JHW](https://jupyterhub.readthedocs.io/en/stable/_images/jhub-fluxogram.jpeg)
 
-### Authentication
+#### Authentication
 JupyterHub provides some basic user management and administrator features. For 
 example, you can whitelist some users or blacklist them, assign special 
 permissions to them, [etc][jupyterhubauth-link].
@@ -75,7 +75,7 @@ are planning to open JupyterHub to the public, this may be the right choice.
 set any username-password pair. You can also set a global password and all users
 who know the correct global password can successfully login to the JupyterHub.
 
-### Notebook Spawners
+#### Notebook Spawners
 JupyterHub's main purpose it to spawning single-user notebooks for the 
 authenticated users. A single-user notebook is just an instance of 
 `jupyter notebook`. Jupyter notebooks are available in many formats. One can 
@@ -98,14 +98,14 @@ add libraries or frameworks to the notebooks, you have to add them to the
 respected `Dockerfile` and rebuild the Docker image. This spawner type has the 
 main focus of this post.
 
-# Customizing the JupyterHub Docker Image
+## Customizing the JupyterHub Docker Image
 JupyterHub has an [official Docker image][jupyterhubdockerimg-link]. This image 
 contains only the JupyterHub service itself. The notebook, authentication 
 mechanisms and/or any configuration is not included. One has to derive a new 
 image from this official image. The correct way of doing this is, of course, 
 preparing a new `Dockerfile`.
 
-## Writing the Dockerfile for JupyterHub
+### Writing the Dockerfile for JupyterHub
 The first thing to do in the `Dockerfile` is to setting the base image. In this 
 case, base image is the official JupyterHub image. Add the following command as 
 the first line of the `Dockerfile` of your custom JupyterHub image.
@@ -177,7 +177,7 @@ jupyterhub/jupyterhub   latest        64d82994fd55    12 months ago       932MB
 openproject/community   8             99757bbbc2a4    14 months ago       1.59GB
 ~~~
 
-## Configuring the JupyterHub
+### Configuring the JupyterHub
 Previously mentioned `jupyterhub_config.py` file contains the necessary 
 information to configure JupyterHub. You can see an example configuration in the
 following snippet.
@@ -214,7 +214,7 @@ c.DockerSpawner.remove_containers = True
 c.Spawner.default_url = '/lab'
 ~~~
 
-### Spawner and Network Configurations
+#### Spawner and Network Configurations
 As you can see from the code snippet, the `spawner_class` attribute is set to 
 the `dockerspawner.DockerSpawner` class. This means that when the user logs in 
 the notebook is spawned in a Docker container. However, you also need to provide
@@ -239,7 +239,7 @@ container. In Docker, the ip addresses of the containers in network namespaces
 are resolved by using their names by internal DNS records. Those environment 
 variables will be set in the `docker-compose.yml` file in a later section.
 
-### Authentication Configurations
+#### Authentication Configurations
 You can use any of the previously mentioned authentication methods. In this 
 example, `OAuthentication` with [Github][github-link] accounts is used.
 
@@ -254,7 +254,7 @@ application for your user. Each application with OAuth have a unique id and
 secret. You should paste the id and secret to the specified places in the 
 configuration file.
 
-### Miscellaneous Configuration Options
+#### Miscellaneous Configuration Options
 The last two lines of the configuration file are optional.
 
 The first one indicates that if a user stops her/his notebook server, then the 
@@ -264,7 +264,7 @@ The second one indicates that the default interface is the JupyterLab and not
 Jupyter Notebook. Jupyter Notebook is fine with its extensions as such. But, the
 interface is not as usable as JupyterLab's interface.
 
-# Customizing the Docker Stack
+## Customizing the Docker Stack
 Luckily, Jupyter project provides official docker stacks for various purposes. 
 If you follow this [link][dockerstacks-link] you can see many `*-notebook` 
 images in the repository. These notebooks are in a hierarchical order. One can 
@@ -292,7 +292,7 @@ For example, I generally make a brand new image from the `tensorflow-notebook`
 and add whatever libraries or packages that I want to install. By doing this, 
 the original `Dockerfiles` stays untouched and the risk of failure is minimized.
 
-## Running Tensorflow with GPU Support
+### Running Tensorflow with GPU Support
 Running Tensorflow with GPU is a little tricky. However, if you follow the 
 [documentation of Tensorflow][tensorflowdoc-link] strictly, the chances that 
 you will have any problems is low. Regardless of running the Tensorflow in 
@@ -334,12 +334,12 @@ you can run the `nvidia-smi` command and see if you can access the GPU.
 
 ~~~ bash
 $ #### Test nvidia-smi with the latest official CUDA image
-$ docker run --rm --gpus all nvidia/cuda:10.0-base nvidia-smi
+$ docker run --rm --gpus all nvidia/cuda:10.1-base nvidia-smi
 ~~~
 
 You should see a result similar to this:
 
-~~~ bash
+~~~
 Sat May 16 20:38:33 2020
 +-----------------------------------------------------------------------------+
 | NVIDIA-SMI 440.64.00    Driver Version: 440.64.00    CUDA Version: 10.1     |
@@ -362,7 +362,7 @@ Sat May 16 20:38:33 2020
 It means that you have successfuly install the NVIDIA Container Toolkit and 
 reach the onboard GPU.
 
-# Getting Everything Together - Docker Compose
+## Getting Everything Together - Docker Compose
 Up to this point, we customize and build multiple images. These images need an 
 orchestrator to work together. Although there are various choices that you can 
 choose to do the orchestration, this document will explain how you can use 
@@ -448,7 +448,7 @@ Compose to use which version of the Docker Compose parser. Then, with the
 `services` key, two services are created. The first one is `jupyterhub` and the 
 second one is `jupyternotebook`.
 
-## Docker Compose Configuration for JupyterHub Service
+### Docker Compose Configuration for JupyterHub Service
 The `build` subkey indicates the place for the image to be used. Since the 
 `docker-compose.yml` file lays in the same place with the `jupyterhub` 
 directory, the value should be `./jupyterhub`. The value of `image` subkey is 
