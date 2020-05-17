@@ -8,7 +8,7 @@ author: Tolga Üstünkök
 
 ## Prerequisites
 **Concepts about Linux**
-1. **Know** how to use a Linux machine from remote via SSH.
+1. Know how to use a Linux machine from remote via SSH.
 2. Understand how network namespaces work under Linux.
 3. Understand what is the mount concept and how mounting works under Linux.
 
@@ -22,7 +22,7 @@ author: Tolga Üstünkök
 1. Knowledge about Git will make your life easier.
 
 ## Introduction
-Development servers with high computation powers are important for research
+Development servers with high computing power are important for research
 groups. Because of that, there are multiple solutions from various companies. 
 Google has its [Colab][colab-link] environment as well as the 
 [Kaggle][kaggle-link] community. Those environments supply processing power 
@@ -53,14 +53,17 @@ explains the working principle of it.
 ![JHW](https://jupyterhub.readthedocs.io/en/stable/_images/jhub-fluxogram.jpeg)
 
 #### Authentication
-JupyterHub provides some basic user management and administrator features. For 
+JupyterHub provides some basic user management and administration features. For 
 example, you can whitelist some users or blacklist them, assign special 
 permissions to them, [etc][jupyterhubauth-link].
 
-For the authentication, you use one of the following methods:
+For the authentication, several methods is listed below:
 - Local Authenticator
 - OAuthenticator
 - Dummy Authenticator
+
+There are more of them. You can check 
+[the documentation][jupyterhubauthadm-link].
 
 **Local Authenticator** manages users on the local system. If you add a new user
 to JupyterHub, the user is created for the system with the command `adduser`. 
@@ -76,17 +79,20 @@ set any username-password pair. You can also set a global password and all users
 who know the correct global password can successfully login to the JupyterHub.
 
 #### Notebook Spawners
-JupyterHub's main purpose it to spawning single-user notebooks for the 
+JupyterHub's main purpose is to spawning single-user notebooks for the 
 authenticated users. A single-user notebook is just an instance of 
-`jupyter notebook`. Jupyter notebooks are available in many formats. One can 
-install it via package managers (i.e. `conda`, `pacman`) or via `pip`. However, 
-if you do not want to fill your machine with random junk, you can run notebooks 
-on a Docker image. You can find official docker stacks in the 
-[Github][dockerstacks-link].
+`jupyter notebook`. Jupyter notebook is available in many formats for different 
+operating systems. One can install it via package managers (i.e. `conda`, 
+`pacman`) or via `pip`. However, if you do not want to fill your machine with 
+random junk, you can run notebooks on a Docker image. You can find official 
+docker stacks in the [Github][dockerstacks-link].
 
 For spawning notebook servers, JupyterHub provides the following methods:
 - Native Spawner
 - Docker Spawner
+
+Again, there are lots of them. You can check 
+[the documentation][jupyterhubspawners-link] for the full list.
 
 **Native Spawner** spawns notebooks from the installed version of the Jupyter 
 Notebook. This version uses the libraries and frameworks from the main system. 
@@ -197,7 +203,7 @@ c.JupyterHub.authenticator_class = GitHubOAuthenticator
 c.GitHubOAuthenticator.oauth_callback_url = \ 
                     'http://<host_ip_addr>/hub/oauth_callback'
 c.GitHubOAuthenticator.client_id = '<client_id>'
-c.GitHubOAuthenticator.client_secret = '<clien_secret>'
+c.GitHubOAuthenticator.client_secret = '<client_secret>'
 
 notebook_dir = os.environ.get('DOCKER_NOTEBOOK_DIR') or '/home/jovyan/work'
 c.DockerSpawner.notebook_dir = notebook_dir
@@ -512,3 +518,5 @@ related or not related to the post. See you...
 [nvidiatoolkit-link]: https://github.com/NVIDIA/nvidia-docker
 [dockercompose-link]: https://docs.docker.com/compose/
 [github-link]: https://github.com/
+[jupyterhubauthadm-link]: https://jupyterhub.readthedocs.io/en/stable/reference/authenticators.html
+[jupyterhubspawners-link]: https://jupyterhub.readthedocs.io/en/stable/reference/spawners.html
