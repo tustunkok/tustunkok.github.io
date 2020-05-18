@@ -6,21 +6,6 @@ categories: ['tutorial', 'notes-to-myself', 'vps']
 author: Tolga Üstünkök
 ---
 
-## Prerequisites
-**Concepts about Linux**
-1. Know how to use a Linux machine from remote via SSH.
-2. Understand how network namespaces work under Linux.
-3. Understand what is the mount concept and how mounting works under Linux.
-
-**Concepts about Docker**
-1. Some working experience with Docker.
-2. Know how to create new images.
-3. Know how to customize existing images.
-4. Some knowledge about Docker Compose.
-
-**Concepts about Other Staff**
-1. Knowledge about Git will make your life easier.
-
 ## Introduction
 Development servers with high computing power are important for research
 groups. Because of that, there are multiple solutions from various companies. 
@@ -40,6 +25,21 @@ the access management part of those isolated environments. In Kaggle, access
 management to the containers is embedded in the site itself. In Colab, this 
 process is handled by Google Accounts. Thus, if you want to set up a site like 
 those, you have to handle the access management by yourself.
+
+### Prerequisites
+**Concepts about Linux**
+1. Know how to use a Linux machine from remote via SSH.
+2. Understand how network namespaces work under Linux.
+3. Understand what is the mount concept and how mounting works under Linux.
+
+**Concepts about Docker**
+1. Some working experience with Docker.
+2. Know how to create new images.
+3. Know how to customize existing images.
+4. Some knowledge about Docker Compose.
+
+**Concepts about Other Staff**
+1. Knowledge about Git will make your life easier.
 
 ### JupyterHub
 [JupyterHub][jupyterhub-link] is an open-source multi-user version of the 
