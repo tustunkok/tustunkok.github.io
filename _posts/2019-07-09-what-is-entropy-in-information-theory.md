@@ -49,7 +49,7 @@ This is it. We made to the end. Almost. We still haven't converted the multiplic
 
 The first six expressions of the sequence are for the letter "A" and the remaining six is for the letter "B". Now, let's make this more obvious and distribute the multiplication over the whole expression.
 
-![](/../assets/images/equation6.png "The coefficient at the beginning of the whole expression is distributed. In the meantime, the summations are grouped together each for a letter (6 for "A" and 6 for "B")."){:style="margin: 0 auto; display: block;" }
+![](/../assets/images/equation6.png "The coefficient at the beginning of the whole expression is distributed. In the meantime, the summations are grouped together each for a letter (6 for A and 6 for B)."){:style="margin: 0 auto; display: block;" }
 
 This is the entropy. For this sequence, as we change the number of letters, the probability of producing the exact same output will change. However, the entropy will never change as the proportion of letter counts are constant regardless of the total number of letters in the sequence. If we generalize the entropy, the following expression can be obtained.
 

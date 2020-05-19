@@ -365,8 +365,8 @@ Sat May 16 20:38:33 2020
 +-----------------------------------------------------------------------------+
 ~~~
 
-It means that you have successfuly install the NVIDIA Container Toolkit and 
-reach the onboard GPU.
+It means that you have successfuly installed the NVIDIA Container Toolkit and 
+reached the onboard GPU.
 
 The only remaining thing at this point is enabling GPU support for tensorflow. 
 To do this one should edit the `Dockerfile` of the `tensorflow-notebook`. The 
