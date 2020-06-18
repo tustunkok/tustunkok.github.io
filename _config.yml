@@ -22,6 +22,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://tustunkok.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: tustunkok
 github_username:  tustunkok
+orcid_id: "https://orcid.org/0000-0002-0464-8803"
 
 # Build settings
 markdown: kramdown
