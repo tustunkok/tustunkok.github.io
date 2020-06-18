@@ -21,7 +21,7 @@
               <li><a class="u-email" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
             {%- endif %}
             {% if site.orcid_id -%}
-              <div itemscope itemtype="https://schema.org/Person">
+              <li><div itemscope itemtype="https://schema.org/Person">
                 <a itemprop="sameAs"
                     content="https://orcid.org/0000-0002-0464-8803"
                     href="https://orcid.org/0000-0002-0464-8803"
@@ -32,7 +32,7 @@
                         style="width:1em;margin-right:.5em;"
                         alt="ORCID iD icon">https://orcid.org/0000-0002-0464-8803
                 </a>
-              </div>
+              </div></li>
             {%- endif %}
           </ul>
         {%- endif %}
