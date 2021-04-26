@@ -1,8 +1,12 @@
 ---
 layout: post
 title:  "Makine Öğrenmesine Giriş - Sunumlar (Turkish)"
+image:
+  path: /assets/images/alina-grubnyak-hero.jpg
+  thumbnail: /assets/images/alina-grubnyak-thumbnail.jpg
+  caption: Photo by <a href="https://unsplash.com/@alinnnaaaa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alina Grubnyak</a> on <a href="https://unsplash.com/s/photos/neural-network?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
 categories: ['tutorial', 'companion']
-author: Tolga Üstünkök
 ---
 
 Bu gönderi makine öğrenmesine giriş sunumlarını desteklemek amaçlı yazılmıştır. İçeriğinde sunumlarda kullanılan materyaller (pdf, odp, kaynak kodları) bulunmaktadır.

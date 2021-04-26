@@ -1,8 +1,11 @@
 ---
 layout: post
 title:  "Simple Docker Based Virtual Private Server"
+image:
+  path: /assets/images/dominik-luckmann-hero.jpg
+  thumbnail: /assets/images/dominik-luckmann-thumbnail.jpg
+  caption: Photo by <a href="https://unsplash.com/@exdigy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Dominik Lückmann</a> on <a href="https://unsplash.com/s/photos/docker?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
 categories: ['notes-to-myself', 'vps']
-author: Tolga Üstünkök
 ---
 
 The aim of this document is to remind me how to get an up and running virtual private server (VPS) from scratch. Every time when I try to migrate my VPS, I find myself completely forgotten to do the job. Today, I decided to write all the steps to a document.

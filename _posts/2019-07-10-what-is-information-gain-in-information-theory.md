@@ -2,7 +2,6 @@
 layout: post
 title:  "What Is Information Gain in Information Theory?"
 category: [information-theory]
-author: Tolga Üstünkök
 ---
 
 Information gain is a very important concept in information theory. In the most simplest case, it is the reduction in entropy. If you are not familiar with entropy, check out my [entropy post]({% post_url 2019-07-09-what-is-entropy-in-information-theory %}). Information gain is used in decision trees. A decision tree is a classification algorithm. Decision tree splits the given feature from specific points with specific questions by branching. By doing that, it tries to maximize information gain. In other words, it tries to minimize the entropy in each branch. To sum up, information gain tells us the reduction in entropy in each split.
