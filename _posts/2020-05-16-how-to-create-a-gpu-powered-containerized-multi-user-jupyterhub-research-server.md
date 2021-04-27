@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to Create a GPU Powered Containerized Multi-User JupyterHub Research Server?"
+title:  "How to Create a GPU-Powered Containerized Multi-User JupyterHub Research Server?"
 image:
   path: /assets/images/joseph-greve-hero.jpg
   thumbnail: /assets/images/joseph-greve-thumbnail.jpg

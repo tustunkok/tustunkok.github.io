@@ -35,6 +35,10 @@ google_fonts:
 
 markdown: kramdown
 mathjax: true
+google_analytics: G-VVMQQ07YVQ
+
+disqus:
+  shortname: tustunkok
 
 twitter:
   username: tustunkok
