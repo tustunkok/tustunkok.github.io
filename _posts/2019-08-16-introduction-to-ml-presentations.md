@@ -9,10 +9,14 @@ image:
 categories: ['tutorial', 'companion']
 ---
 
-Bu gönderi makine öğrenmesine giriş sunumlarını desteklemek amaçlı yazılmıştır. İçeriğinde sunumlarda kullanılan materyaller (pdf, odp, kaynak kodları) bulunmaktadır.
+Bu gönderi makine öğrenmesine giriş sunumlarını desteklemek amaçlı yazılmıştır.
+İçeriğinde sunumlarda kullanılan materyaller (pdf, odp, kaynak kodları)
+bulunmaktadır.
 
-## Program
-### Gün 1: Python'u Doğru Kullanmak
+# Program
+
+## Gün 1: Python'u Doğru Kullanmak
+
 1. Pythonism - Tutarlılık
 2. Sayısal Tipleri Taklit Etmek
 3. Python Veri Yapıları
@@ -25,7 +29,8 @@ Bu gönderi makine öğrenmesine giriş sunumlarını desteklemek amaçlı yazı
 10. Değişkenlere Kısa Bir Bakış
 11. Operatör Aşırı Yükleme
 
-### Gün 2: Makine Öğrenmesine Giriş
+## Gün 2: Makine Öğrenmesine Giriş
+
 1. Keşifsel Veri Analizi
     * Veri Tipleri
     * Veri İşleme
@@ -45,15 +50,19 @@ Bu gönderi makine öğrenmesine giriş sunumlarını desteklemek amaçlı yazı
 10. Optimizasyon Yöntemleri
     * Particle Swarm Optimization
 
-### Gün 3: Derin Öğrenmeye Giriş
+## Gün 3: Derin Öğrenmeye Giriş
+
 1. Vanilla Derin Ağlar
 2. Convolutional Neural Networks
 3. Autoencoders
 
-## Sunum Linkleri
+# Sunum Linkleri
+
 [**Birinci Gün**](/assets/pdfs/Day 1.pdf)  
 [**İkinci Gün**](/assets/pdfs/Day 2.pdf)  
 [**Üçüncü Gün**](/assets/pdfs/Day 3.pdf)
 
-## Kaynak kodlar
-Sunumlar sırasında üretilen Jupyter Notebook'ları [Github](https://github.com/tustunkok/tbd-demos)'da bulabilirsiniz.
+# Kaynak kodlar
+
+Sunumlar sırasında üretilen Jupyter Notebook'ları
+[Github](https://github.com/tustunkok/tbd-demos)'da bulabilirsiniz.

@@ -5,14 +5,15 @@ permalink: /about/
 ---
 
 I am a research assistant of Software Engineering Department at Atılım
-University, Turkey. I received my Bachelor's degree in Computer Engineering from
-Atılım University in 2017. I am continuing my Master's study in Software
-Engineering with [Murat Karakaya](http://user.atilim.edu.tr/~murat.karakaya/).
-Between September 2017 and February 2018, I worked as a software engineer at
-Yalabık Mühendislik. My primary research interests are Image Tag Refinement,
-natural computation methods (specifically Particle Swarm Optimization), and Word
-Embedding.
+University, Turkey. I received my Bachelor's degree in Computer Engineering in
+2017 and Master's degree in Software Engineering in 2021 from Atılım University,
+Turkey. Between September 2017 and February 2018, I worked as a software
+engineer at Yalabık Mühendislik. My primary research interests are Image Tag
+Refinement, natural computation methods (specifically Particle Swarm
+Optimization), and Word Embedding. You can find the public version of my CV
+[here](/assets/pdfs/MyCV.pdf). For the detailed version, please send an email to
+[tolgaustunkok@yahoo.com](mailto:tolgaustunkok@yahoo.com).
 
-I am a semi professional pianist and a Hacettepe University Parttime Guitar
+I am a semi-professional pianist and a Hacettepe University Parttime Guitar
 Department graduate (2009). I am a member of TED Symphony Orchestra as a tubist
 since 2007.
