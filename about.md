@@ -1,19 +1,31 @@
 ---
 layout: page
-title: About
+title: About Me
 permalink: /about/
 ---
 
-I am a research assistant of Software Engineering Department at Atılım
-University, Turkey. I received my Bachelor's degree in Computer Engineering in
-2017 and Master's degree in Software Engineering in 2021 from Atılım University,
-Turkey. Between September 2017 and February 2018, I worked as a software
-engineer at Yalabık Mühendislik. My primary research interests are Image Tag
-Refinement, natural computation methods (specifically Particle Swarm
-Optimization), and Word Embedding. You can find the public version of my CV
-[here](/assets/pdfs/MyCV.pdf). For the detailed version, please send an email to
-[tolgaustunkok@yahoo.com](mailto:tolgaustunkok@yahoo.com).
+Hello! I'm **Tolga Üstünkök** — a DevOps Engineer at **Türkiye İş Bankası**, with a strong foundation in both **Computer Engineering** (undergraduate) and **Software Engineering** (graduate).  
 
-I am a semi-professional pianist and a Hacettepe University Parttime Guitar
-Department graduate (2009). I am a member of TED Symphony Orchestra as a tubist
-since 2007.
+My current professional focus lies in **monitoring systems** and **anomaly detection in time-series system metrics**, where I bring both practical experience and a passion for precision. I specialize in designing scalable, reliable observability architectures that help detect and resolve issues proactively.
+
+## Background & Research
+
+Previously, I was active in **computer vision research**, which continues to influence how I approach complex problems — blending mathematical rigor with software intuition. This technical diversity supports my day-to-day DevOps work, especially when modeling anomalies or building alerting pipelines.
+
+## Tech Stack & Interests
+
+- **Monitoring & Observability**: Grafana, Telegraf, ELK, OpenTelemetry, Apache NiFi
+- **Infrastructure**: Docker, Kubernetes, Ansible
+- **Programming**: Python, Bash, Go
+- **Anomaly Detection**: Time-series modeling, rule-based and statistical systems
+
+## Beyond Engineering
+
+I'm also a **semi-professional pianist** and a **Hacettepe University Part-time Guitar Department graduate (2009)**. Music has been a lifelong passion and a counterbalance to my technical career — helping me stay creative, focused, and grounded.
+
+---
+
+## Let's Connect
+
+Feel free to check out my repositories, projects, or reach out if you're interested in observability engineering, anomaly detection, or music-tech crossovers.
+[tolgaustunkok@gmail.com](mailto:tolgaustunkok@gmail.com)
